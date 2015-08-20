@@ -1,0 +1,21 @@
+extends ../layout
+
+block title
+
+block content
+	div(class="container")
+		div(class="panel panel-primary")
+			div(class="panel-heading") Available chat sessions
+			div(class="panel-body")
+				ul(ul class="list-group")
+				if model.length>0
+					each s in model
+						li(class="list-group-item")
+							a(href="/session/" + s.Id)= s.Name
+				else
+					h4 No sessions available
+			
+				br
+				div(class="text-right")
+					a(class="btn btn-success" href="/session/new") New Session
+		

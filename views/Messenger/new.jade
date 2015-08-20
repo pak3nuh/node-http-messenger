@@ -1,0 +1,23 @@
+extends ../layout
+
+block title
+
+block content
+	div(class="container")
+		div(class="panel panel-primary")
+			div(class="panel-heading") New Chat Session
+			div(class="panel-body")
+				form(method="POST",action="/session/new")
+					div(class="form-group")
+						input(class="form-control" placeholder="Session Name" type="text" id="sessionName" name="sessionName")= model.Name
+					div(class="form-group")
+						- var chk = model ? model.IsPrivate : false
+						div(class="checkbox")
+							label(for="isPrivate")
+								input(type="checkbox" id="isPrivate" name="isPrivate" checked=chk)
+								strong Private
+							
+					div(class="form-group text-right")
+						div(class="btn-group")
+							a(class="btn btn-danger" href="/session") Back
+							button(class="btn btn-success" type="submit") Create

@@ -1,0 +1,39 @@
+extends ../layout
+
+block title
+	script(type="text/javascript")= "var sessionId='" + chatSession.Id +"'" 
+	script(type="text/javascript" src="/javascripts/Views/Session/session.js")
+
+block content
+	div(class="container")
+		div(class="panel panel-primary")
+			div(class="panel-heading")= chatSession.Name
+			div(class="panel-body")
+				div
+					div(class="div-table-chatsession")
+						table(class="table table-hover" id="msgTable")
+							thead
+								tr
+									th(class="col-xs-7") Message
+									th(class="col-xs-2") Username
+									th(class="col-xs-3") Time
+							tbody
+								each msg in chatSession.messages
+									tr
+										td= msg.Message
+										td= msg.Username
+										td= new Date(msg.Date).toISOString()
+				form(role="form" method="POST" 
+					action="/session/" + chatSession.Id + "/message/new")
+					div(class="form-group")
+						label(for="message" class="") Message:
+						textarea(class="form-control" id="message" name="message" rows="5")
+						small Use ctrl + enter to submit
+					div(class="form-group text-right ")
+						div(class="btn-group")
+							a(class="btn btn-danger" href="/session") Back
+							input(class="btn btn-success" type="button" value="Stop Refresh" id="clientRefresh")
+							if(true)
+								input(class="btn btn-success" type="button" value="SendAsync" id="btnAsync")
+							else
+								input(class="btn btn-success" type="submit" value="SendWEB")

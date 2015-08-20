@@ -1,0 +1,7 @@
+{
+  "name": "string-utils",
+  "description": "A set of utility functions for string treatment.",
+  "version": "0.0.1",
+  "private": true,
+  "main":"./string-utils.js"
+}

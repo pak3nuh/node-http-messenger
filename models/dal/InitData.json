@@ -1,0 +1,29 @@
+{
+	"Users":[
+		{
+			"Id":"0",
+			"Username":"ncaro",
+			"Password":"pass1",
+			"Email":"mail1"
+		},
+		{
+			"Id":"1",
+			"Username":"mlouro",
+			"Password":"pass2",
+			"Email":"mail1"
+		}
+	],
+	"Sessions":[
+		{
+			"Id":"0",
+			"Name":"Public",
+			"Private":false
+		},
+		{
+			"Id":"my-private-session",
+			"Name":"my-private-session",
+			"Private":true
+		}
+	]
+
+}

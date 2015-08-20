@@ -1,0 +1,14 @@
+extends ../layout
+
+block title
+
+block content
+	div(class="row")
+		div(class="col-xs-6 col-xs-offset-3")
+			div(class="panel panel-primary")
+				div(class="panel-heading") Login
+				div(class="panel-body")
+					form(method="POST" action="/login" role="form" class="form-inline text-center")
+						input(class="form-control" type="text" id="username" name="username" placeholder="Username")
+						input(class="form-control" type="password" id="password" name="password" placeholder="Password")
+						input(class="btn btn-success" type="submit" value="Login")
