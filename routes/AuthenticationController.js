@@ -1,5 +1,5 @@
 // access to user business layer and controller
-var db = require('../models/dal/DBContextMemory').AppUser;
+var db = require('../models/dal/DBContextChoser').AppUser;
 
 // access to user entity
 var userModel = require('../models/entities/AppUser');
