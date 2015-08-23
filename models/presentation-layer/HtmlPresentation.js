@@ -14,7 +14,7 @@ htmlP.getChatSessions = function(incPrivate, doneCb){
  */
 htmlP.getChatSessionDetail = function(sessionId, doneCb){
 	blSsn.findChatSession(function(item){
-		return 	item.Id = sessionId;
+		return 	item.Id == sessionId;
 	}
 	,function(err, itemFound){
 		if(err)
