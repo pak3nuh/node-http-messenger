@@ -11,7 +11,7 @@ block content
 			div(class="panel-body")
 				div
 					div(class="div-table-chatsession")
-						table(class="table table-hover" id="msgTable")
+						table(class="table table-hover table-condensed" id="msgTable")
 							thead
 								tr
 									th(class="col-xs-7") Message
@@ -20,7 +20,9 @@ block content
 							tbody
 								each msg in chatSession.messages
 									tr
-										td= msg.Message
+										td
+											each line in msg.Message.split('\n') 
+												p=line
 										td= msg.Username
 										td= new Date(msg.Date).toISOString()
 				form(role="form" method="POST" 

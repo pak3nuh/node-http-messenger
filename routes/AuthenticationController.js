@@ -49,7 +49,7 @@ var ensureAuthenticated = function(req, res, next) {
         return next();
     }
 
-    res.redirect('/login');
+    res.redirect('/login?redirect='+req.url);
 }
 
 var apiAuthentication = function(req,res,next){
@@ -68,12 +68,26 @@ router.all('/api*', apiAuthentication);
 router.all('/session*', ensureAuthenticated);
   
 // routes for login/logout
-router.get('/login', function (req, res) {
+router.get('/login', function (req, res, next) {
+  res.locals.redirect = req.query.redirect;
+  if(req.query.loginErr){
+    res.locals.errorModalMessage='Invalid username or password';
+    res.locals.errorModalTitle='Error';
+  }
   return res.render('Users/login');
 });
 
-router.post('/login', passport.authenticate('local', { successRedirect: '/',
-                                                    failureRedirect: '/login'}));
+router.post('/login',function(req,res,next){
+    passport.authenticate('local', function(err, user, info) {
+      var redirect = req.body.redirect == '' ? '/' : req.body.redirect;
+      if (err) { return next(err); }
+      if (!user) { return res.redirect('/login?loginErr=1&redirect=' + redirect); }
+      req.logIn(user, function(err) {
+        if (err) { return next(err); }
+        return res.redirect(redirect);
+      });
+    })(req, res, next);
+});
 
 router.get('/logout', function(req, res) {
   req.logout();

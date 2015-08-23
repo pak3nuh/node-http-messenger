@@ -4,9 +4,17 @@ function updateDOM(msgArray){
 	if(msgArray==null || !Array.isArray(msgArray))
 		return;
 
+	function lineBreaks(input){
+		var str = '';
+		input.split('\n').forEach(function(line){
+			str+='<p>'+line+'</p>';
+		});
+		return str;
+	}
+
 	msgArray.forEach(function(item){
 		var elem = '<tr>'
-			+ '<td>' + item.Message.replace('\n','<br>') + '</td>'
+			+ '<td>' + lineBreaks(item.Message) + '</td>'
 			+ '<td>' + item.Username + '</td>'
 			+ '<td>' + new Date(item.Date).toISOString() + '</td>'
 			+ '</tr>'

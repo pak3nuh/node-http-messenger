@@ -26,3 +26,6 @@ a {
   max-height: 300px;
   overflow-y: auto;
 }
+.div-table-chatsession p{
+  margin: 0px;
+}
