@@ -13,10 +13,7 @@ htmlP.getChatSessions = function(incPrivate, doneCb){
  * Returns chat session and its messages
  */
 htmlP.getChatSessionDetail = function(sessionId, doneCb){
-	blSsn.findChatSession(function(item){
-		return 	item.Id == sessionId;
-	}
-	,function(err, itemFound){
+	blSsn.findChatSessionById(sessionId, function(err, itemFound){
 		if(err)
 			return doneCb(err);
 		
@@ -33,14 +30,10 @@ htmlP.getChatSessionDetail = function(sessionId, doneCb){
 	});
 }
 
-htmlP.findChatSession = function(predicate,doneCb){
-	blSsn.findChatSession(predicate,doneCb);
-}
-
 htmlP.addChatSession = function(session, doneCb){
 	blSsn.add(session, doneCb);
 }
 
 htmlP.addMessage = function(message, doneCb){
-	blSsn.add(message,doneCb);
+	blSsn.addMessage(message,doneCb);
 }

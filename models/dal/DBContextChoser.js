@@ -2,8 +2,8 @@
  * Just for enabling fast switch between contextes;
  * */
 
-var context = require("./DBContextMemory");
-//var context = require("./DBContextMemoryDb");
+//var context = require("./DBContextMemory");
+var context = require("./DBContextMemoryDb");
 
 var loadInitData = true;
 if (loadInitData) {

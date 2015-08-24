@@ -11,6 +11,7 @@ var LocalStrategy = require('passport-local').Strategy;
 
 // passport strategy and serialize/deserialize functions
 passport.use(new LocalStrategy(function(username, password, done)  {
+    db.setClosure({username:username, password:password});
     db.find(function(item){
       
       return item.Username == username;
@@ -21,7 +22,7 @@ passport.use(new LocalStrategy(function(username, password, done)  {
 
         user = user || userModel.Empty();
 
-        if(!user.Password || !user.ValidatePassword(password)){
+        if(!user.Password || user.Password!=password){
           return done(null, false, {error: "Invalid Username or Password."});
         } else {
           return done(null,user);
@@ -34,6 +35,7 @@ passport.serializeUser(function(user, done) {
 });
 
 passport.deserializeUser(function(username, done) {
+  db.setClosure({username:username});
   db.find(function(item){
       return item.Username == username;
     }, function (err, user) {

@@ -5,6 +5,7 @@ var cs = require('../entities/ChatSession');
 var SessionBl = {}
 
 function checkIfSessionExists(sessionName, doneCb){
+	dbSsn.setClosure({sessionName:sessionName});
 	dbSsn.find(function(item){ 
 		return item.Name==sessionName; 
 	}, function(err, item){
@@ -36,6 +37,7 @@ SessionBl.add = function(session, doneCb){
 }
 
 SessionBl.getChatSessions = function(incPrivate, doneCb){
+	dbSsn.setClosure({incPrivate:incPrivate});
 	dbSsn.get(
 		function(item){
 			return incPrivate || !item.IsPrivate;
@@ -44,11 +46,15 @@ SessionBl.getChatSessions = function(incPrivate, doneCb){
 	);
 }
 
-SessionBl.findChatSession = function(predicate, doneCb){
-	dbSsn.find(predicate, doneCb);
+SessionBl.findChatSessionById = function(sessionId, doneCb){
+	dbSsn.setClosure({sessionId:sessionId});
+	dbSsn.find(function(item){
+		return item.Id == sessionId;
+	}, doneCb);
 }
 
 SessionBl.getChatMessages = function(sessionId, doneCb){
+	dbMsg.setClosure({sessionId:sessionId});
 	dbMsg.get(function(item){
 		return item.SessionId == sessionId;
 	}

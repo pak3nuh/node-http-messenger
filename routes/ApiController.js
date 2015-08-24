@@ -4,10 +4,7 @@ var bl = require('../models/business-layer/SessionBl');
 var MsgModel = require('../models/entities/Message');
 
 router.get('/session/:sId/*',function(req,res,next){
-	bl.findChatSession(function(item){
-		return item.Id == req.params.sId;
-	}
-	,function(err, sObj){
+	bl.findChatSessionById(req.params.sId, function(err, sObj){
 		if(err)
 			return next(err);
 			
@@ -30,9 +27,10 @@ router.get('/session/:sId/message', function(req,res,next){
 		var tmp =[];
 		var starting = Number(req.query.starting);
 		objArray.forEach(function(item, idx){
-			//Items retreived using Object.create
 			if(starting < item.Date)
-				tmp.push(Object.getPrototypeOf(item));
+				//Items retreived using Object.create
+				//tmp.push(Object.getPrototypeOf(item)); //only for single process memory table
+				tmp.push(item); //for memory-db module
 		});
 		
 		return res.status(200).json(JSON.stringify(tmp));
@@ -54,7 +52,7 @@ router.post('/session/:sId/message/new', function(req,res,next){
 		if(err)
 			return next(err);
 		
-		res.status(200).send();
+		res.status(200).json({insCnt:insCnt});
 	});
 });
 

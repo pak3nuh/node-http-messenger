@@ -18,7 +18,7 @@ function DbOperations(tableName){
 	this.get = function(predicate, doneCb){
 		db.getRecords(tableName, predicate, doneCb);
 	}
-	this.setContext = db.setContext;
+	this.setClosure = db.setClosure;
 }
 
 var context = {
