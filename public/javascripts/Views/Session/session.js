@@ -93,17 +93,21 @@ window.addEventListener('load', function(event){
 	
 	$('#btnAsync').click(function(){
 		var msgText = $('#message');
-		msgText.attr('disabled','disabled');
 		if(msgText.val().length > 0){
+			msgText.attr('disabled','disabled');
+			myClient.stopWatcher();
 			myClient.sendMessage(sessionId, msgText.val(), function(err,data){
-				msgText.removeAttr('disabled');
 				if(err){
+					msgText.removeAttr('disabled');
+					reloadWatcher();
 					console.log(err);
 					alert('Error sending data');
 					return;
 				}
 				
 				myClient.getMessages(sessionId, function(err, msgArray){
+					msgText.removeAttr('disabled');
+					reloadWatcher();
 					if(err)
 						return;
 				
