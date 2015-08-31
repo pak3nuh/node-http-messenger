@@ -1,6 +1,0 @@
-{
-  "name": "db-context",
-  "description":"An abstraction for an entity model database",
-  "version": "0.0.1",
-  "main":"index.js"
-}
