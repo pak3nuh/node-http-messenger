@@ -1,0 +1,17 @@
+extends ./layout
+
+block title
+	script(type="text/javascript")="var redirUrl = '"+redirUrl+"';"
+	script(type="text/javascript").
+		window.addEventListener('load', function(event){
+			setTimeout(function(){
+				window.location = redirUrl;
+			}, 5000);
+		});
+
+block content
+	div(class="container")
+		div(class="panel panel-primary")
+			div(class="panel-heading")= title
+			div(class="panel-body")
+				p= message

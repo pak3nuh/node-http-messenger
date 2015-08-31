@@ -13,6 +13,8 @@ msg.Client = function(){
 	}
 	
 	var lastSyncTime = Date.now();
+	this.getLastSyncTime = function(){return lastSyncTime;}
+	this.setLastSyncTime = function(date){lastSyncTime = date}
 	
 	function getMessages(sessionId, callback){
 		var url = '/api/session/' 
@@ -72,7 +74,8 @@ msg.Client = function(){
 		} , timeFrame);
 	}
 	this.stopWatcher = function(){
-		clearTimeout(watcher);
+		if(watcher)
+			clearTimeout(watcher);
 	}
 	
 }

@@ -1,8 +1,35 @@
 var myClient = new msg.Client();
+var maxTimer = 30 * 1000;
+var cntDefault = 3;
+var timerDefault = 5 * 1000;
+var timerIncrement = 2000;
+
+var timer = timerDefault;
+var cnt = cntDefault;
+
+function manageTimer(msgArray){
+	if(msgArray.length == 0){
+		if(cnt>0){
+			cnt--;
+		} else {
+			if(timer<=maxTimer){
+				timer += timerIncrement;
+				cnt = cntDefault;
+				reloadWatcher();
+			}
+		}
+	} else {
+		timer = timerDefault;
+		cnt = cntDefault;
+		reloadWatcher();
+	}
+}
 
 function updateDOM(msgArray){
 	if(msgArray==null || !Array.isArray(msgArray))
 		return;
+
+	manageTimer(msgArray);
 
 	function lineBreaks(input){
 		var str = '';
@@ -29,8 +56,17 @@ function scrollDiv(){
 		objDiv[0].scrollTop = objDiv[0].scrollHeight;
 }
 
+function reloadWatcher(){
+	myClient.stopWatcher();
+	myClient.startWatcher(sessionId, timer, function(err, msgArray){
+		if(err)
+			return;
+	
+		updateDOM(msgArray);
+	});
+}
+
 window.addEventListener('load', function(event){
-	var timer = 5 * 1000;
 	
 	$('#clientRefresh').click(function(){
 		if(this.value == 'Stop Refresh'){
@@ -55,17 +91,12 @@ window.addEventListener('load', function(event){
 		}
 	});
 	
-	myClient.startWatcher(sessionId, timer, function(err, msgArray){
-		if(err)
-			return;
-	
-		updateDOM(msgArray);
-	});
-	
 	$('#btnAsync').click(function(){
 		var msgText = $('#message');
+		msgText.attr('disabled','disabled');
 		if(msgText.val().length > 0){
 			myClient.sendMessage(sessionId, msgText.val(), function(err,data){
+				msgText.removeAttr('disabled');
 				if(err){
 					console.log(err);
 					alert('Error sending data');
@@ -84,5 +115,6 @@ window.addEventListener('load', function(event){
 		}
 	});
 	
+	reloadWatcher();
 	scrollDiv();
 });

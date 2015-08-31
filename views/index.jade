@@ -2,8 +2,12 @@ extends ./layout.jade
 
 block title
 
+
 block content
 	div.container-fluid
 		div.jumbotron
 			h1 Welcome to HTTP Messaging
-			p Description of sites functionality
+			p The pourpose for this application was to implement a RESTfull api that supports a messenger app. The main consumer is the browser, but certain parts of the application are consumed by a javascript API.
+			p There are plans for a V2 that implements websockects for the client/server communication.
+			p For now it is possible to register, create chat rooms (private or not) and start chatting.
+			strong Please keep in mind that this app is a demo supported by an in-memory database, meaning all data is volatile.

@@ -8,45 +8,20 @@ html
 		
 		link(rel="stylesheet" href="/stylesheets/style.css")
 		
+		title HTTP Messenger
 		//Title and per page scripts
 		block title
 
 	body
 		//Navbar
-		div(class="navbar navbar-default")
-			div.container-fluid
-				div(class="navbar-header")
-					button(type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar")
-						span(class="icon-bar")
-						span(class="icon-bar")
-						span(class="icon-bar")
-					a(class="navbar-brand" href="/") HTTP Messenger
-				div(class="collapse navbar-collapse" id="myNavbar")
-					ul(class="nav navbar-nav")
-						li(class="")
-							a( href="/session") List Sessions
-					ul(class="nav navbar-nav navbar-right")
-						li
-							a(href="#")
-								span(class="glyphicon glyphicon-user") Sign Up
-						li
-							a(href="/login")
-								span(class="glyphicon glyphicon-log-in") Login
+		include ./navbar.jade
+
 		
 		//Content
 		block content
 		
 		//Error modal
-		div(id="errModal" class="modal fade" role="dialog")
-			div(class="modal-dialog")
-				div(class="modal-content")
-					div(class="modal-header")
-						button( type="button" class="close" data-dismiss="modal") X
-						h4( class="modal-title")= errorModalTitle
-					div( class="modal-body")
-						p(id="errorModalMessage")= errorModalMessage
-					div( class="modal-footer")
-						button( type="button" class="btn btn-default" data-dismiss="modal") Close
+		include ./errorModal.jade
 		
 		hr
 		footer

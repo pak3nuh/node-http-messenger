@@ -15,7 +15,7 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
-app.use(favicon(__dirname + '/public/favicon.ico'));
+//app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
@@ -37,9 +37,11 @@ var index = require('./routes/index');
 var msg = require('./routes/MessengerController');
 var auth = require('./routes/AuthenticationController');
 var api = require('./routes/ApiController');
+var menuBar = require('./routes/MenuBarController');
 
 
 app.use(auth);
+app.use(menuBar);
 app.use('/', index);
 app.use('/api', api);
 app.use('/session',msg);
