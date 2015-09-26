@@ -1,7 +1,7 @@
 var myClient = new msg.Client();
 var maxTimer = 30 * 1000;
 var cntDefault = 3;
-var timerDefault = 5 * 1000;
+var timerDefault = 2 * 1000;
 var timerIncrement = 2000;
 
 var timer = timerDefault;

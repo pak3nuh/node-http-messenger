@@ -12,7 +12,7 @@ msg.Client = function(){
 		return null;
 	}
 	
-	var lastSyncTime = Date.now();
+	var lastSyncTime = 0;
 	this.getLastSyncTime = function(){return lastSyncTime;}
 	this.setLastSyncTime = function(date){lastSyncTime = date}
 	

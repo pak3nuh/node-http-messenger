@@ -32,7 +32,7 @@ router.get('/session/:sId/message', function(req,res,next){
 				//tmp.push(Object.getPrototypeOf(item)); //only for single process memory table
 				tmp.push(item); //for memory-db module
 		});
-		
+		res.append('cache-control','private, max-age=0, no-cache');
 		return res.status(200).json(JSON.stringify(tmp));
 	});
 });

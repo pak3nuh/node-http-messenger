@@ -18,13 +18,7 @@ block content
 									th(class="col-xs-2") Username
 									th(class="col-xs-3") Time
 							tbody
-								each msg in chatSession.messages
-									tr
-										td
-											each line in msg.Message.split('\n') 
-												p=line
-										td= msg.Username
-										td= new Date(msg.Date).toISOString()
+
 				form(role="form" method="POST" 
 					action="/session/" + chatSession.Id + "/message/new")
 					div(class="form-group")
